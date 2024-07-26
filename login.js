@@ -18,10 +18,13 @@ const HEIGHT = Dimensions.get('screen').height;
 const LoginScreen = ({ setScreen }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const url1 = 'http://192.168.125.44:8080/api/users/login';
+    const url2 = 'http://localhost:8080/api/users/login';
     
     const handleLogin = async () => {
       try {
-        const response = await axios.post('http://localhost:8080/api/users/login', {
+        const response = await axios.post('http://192.168.125.44:8080/api/users/login', {
           username,
           password
         });
