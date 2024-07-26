@@ -60,7 +60,7 @@ const LoginScreen = ({ setScreen }) => {
               placeholder='Şifre'  
               placeholderTextColor={'#FFF'}
               value={password}
-              onChangeText={setPassword}
+              onChangeText={setPassword} 
               secureTextEntry
             />
             <TouchableOpacity style={styles.login_submit_button} onPress={handleLogin}>

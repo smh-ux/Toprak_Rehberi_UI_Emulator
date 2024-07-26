@@ -16,8 +16,8 @@ const WelcomePage = ({ setScreen }) => {
     return(
         <View style={styles.welcome_container}>
             <Image 
-                source={require('./images/welcome3.png')}
-                style={styles.welcome_img}
+              source={require('./images/welcome3.png')}
+              style={styles.welcome_img}
             />
             <Text style={styles.title_text}>Toprak Rehberi</Text>
             <Text style={styles.welcome_text}>Ekim yapılacak bölgeleri keşfetmeye ve bilinçli ürün yetiştirmeye hazır mısın.</Text>

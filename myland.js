@@ -6,65 +6,68 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import axios from 'axios';
+import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 
 const WIDTH = Dimensions.get('screen').width;
-const HEIGHT = Dimensions.get('screen').height;
+const HEIGHT = Dimensions.get('screen').height; 
+
+const info = ({name, city, town, area}) => (
+  <View style={styles.mylands_content}>
+    <View style={styles.mylands_content_container}>
+      <Text style={styles.mylands_content_title}>Arazi Tipi:</Text>
+      <Text style={styles.mylands_content_text}>{name}</Text>
+    </View>
+    <View style={styles.mylands_content_container}>
+      <Text style={styles.mylands_content_title}>Şehir:</Text>
+      <Text style={styles.mylands_content_text}>{city}</Text>
+    </View>
+    <View style={styles.mylands_content_container}>
+      <Text style={styles.mylands_content_title}>İlçe:</Text>
+      <Text style={styles.mylands_content_text}>{town}</Text>
+    </View>
+    <View style={styles.mylands_content_container}>
+      <Text style={styles.mylands_content_title}>Alan:</Text>
+      <Text style={styles.mylands_content_text}>{area} m2</Text>
+    </View>
+  </View>
+);
 
 const MyLandScreen = ({ setScreen }) => {
-  const my = 0
-  // const [land, setLand] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchLands = async () => {
-  //     try {
-  //       const response = await axios.get('http://192.168.125.44:8081/api/lands');
-  //       setLands(response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
+    const info_data = [
+      {name: 'Tarla', city: 'Ankara', town: 'Polatlı', area: '1000'},
+      {name: 'Bağ', city: 'Ankara', town: 'Gölyaka', area: '1500'},
+      {name: 'Bahçe', city: 'Ankara', town: 'Sincan', area: '1000'}
+    ];
 
-  //   fetchLands();
-
-  // }, []); 
-  const info = ({name, city, town, area, my}) => {
-    const name_value = name
-    const city_value = city
-    const town_value = town
-    const area_value = area
-    const my_value = my + my
-
-    console.log(my_value);
-
-    return(
-      <TouchableOpacity onPress={() => setScreen('MyLandInfoScreen')}>
-        <View style={styles.mylands_content}>
-          <Text style={styles.mylands_content_text}>{name_value}</Text>
-          <Text style={styles.mylands_content_text}>{city_value}</Text>
-          <Text style={styles.mylands_content_text}>{town_value}</Text>
-          <Text style={styles.mylands_content_text}>{area_value} m2</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
+    {/*add function to TouchableOpacity*/}
+  
   return(
     <SafeAreaView style={styles.myland_container}>
       <View style={styles.myland_header}>
         <Text style={styles.myland_header_title}>Arazilerim</Text> 
       </View>
-      <View style={styles.mylands}>
-        {info({name: 'Arazi1', city: 'Ankara', town: 'Polatlı', area: '1000'})}
-        {info({name: 'Arazi2', city: 'Ankara', town: 'Gölyaka', area: '1500'})}
-        {info({name: 'Arazi3', city: 'Ankara', town: 'Sincan', area: '1000'})}
+      <View style={styles.mylands}>   
+          {info_data.length > 0 ? (
+            info_data.map((item, index) => (
+              <React.Fragment key={index}>
+                <TouchableOpacity> 
+                  {info(item)}
+                </TouchableOpacity>
+              </React.Fragment>
+            ))) : (
+              <></>
+          )}
+          <TouchableOpacity style={styles.add_button}>
+            <Text style={styles.add_button_text}>Ekle</Text>
+          </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
-
-
 
 const styles = StyleSheet.create({  
   myland_container: {
@@ -90,24 +93,54 @@ const styles = StyleSheet.create({
   mylands: {
     width: WIDTH,
     height: 100,
-    marginTop: 50,
+    marginTop: 25,
     zIndex: 1,
-    flexDirection: 'row'
   },
 
   mylands_content: {
-    width: 105,
-    height: 100,
+    width: WIDTH-40,
+    height: 150,
     backgroundColor: '#FFF',
-    borderRadius: 20,
+    borderTopLeftRadius: 300,
+    borderBottomRightRadius: 300,
     marginLeft: 20,
-    zIndex: 5
+    marginTop: 20,
+    zIndex: 5,
+  },
+
+  mylands_content_container: {
+    flexDirection:'row',
+    margin:'auto'
+  },
+
+  mylands_content_title: {
+    color: '#000',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
 
   mylands_content_text: {
     color: '#000',
-    fontSize: 18,
-    textAlign: 'center',
+    fontSize: 20,
+    textAlign: 'center'
+  },
+
+  add_button: {
+    flexDirection: 'column',
+    width: WIDTH-40,
+    height: 70,
+    marginLeft: 20,
+    borderRadius: 50,
+    backgroundColor: '#FFF',
+    marginTop: 20
+  },
+
+  add_button_text: {
+    color: '#000',
+    margin: 'auto',
+    fontWeight: 'bold',
+    fontSize: 25
   }
 
 });

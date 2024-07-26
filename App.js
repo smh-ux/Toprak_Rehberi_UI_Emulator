@@ -11,7 +11,7 @@ import SuccessRateScreen from './successrate';
 import FeedBackScreen from './feedback';
 
 const App = () => {
-  const [screen, setScreen] = useState('FeedBackScreen');
+  const [screen, setScreen] = useState('WelcomeScreen');
 
   if (screen === 'WelcomeScreen') {
     return <WelcomeScreen setScreen={setScreen} />;
